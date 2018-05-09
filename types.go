@@ -551,3 +551,15 @@ type ContextResponseDeleted struct {
 
 	Deleted []string `json:"deleted"`
 }
+
+type EventRequest struct {
+	SessionId string          `json:"sessionId"`
+	Language  LanguageTag     `json:"lang"`
+	Event     EventObject     `json:"event"`
+	Contexts  []ContextObject `json:"contexts,omitempty"`
+}
+
+type EventObject struct {
+	Name string                 `json:"name"`
+	Data map[string]interface{} `json:"data,omitempty"`
+}

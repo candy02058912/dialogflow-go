@@ -6,6 +6,18 @@ import (
 	"encoding/json"
 )
 
+// Trigger event
+func (c *Client) TriggerEvent(event EventRequest) (result QueryResponse, err error) {
+	var bytes []byte
+	if bytes, err = c.httpPost("query", nil, nil, event); err == nil {
+		if err = json.Unmarshal(bytes, &result); err == nil {
+			return result, nil
+		}
+	}
+
+	return QueryResponse{}, err
+}
+
 // Query text.
 func (c *Client) QueryText(query QueryRequest) (result QueryResponse, err error) {
 	var bytes []byte
